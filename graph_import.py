@@ -43,6 +43,9 @@ def get_graph(dataset):
     return final_grap
 
 
+# Los grafos que se generan a partir de los xml no tienen la diagonal
+# Al intentar construir un grafo con la libreria networkx rompe porque la matriz no es cuadrada (porque falta la diagonal)
+# Esta funcion lo que hace es agregar el elemento de la diagonal, seteandolo en 0
 def add_diagonal(graph):
     np_g = np.array(graph)
     d = np_g.shape[0]
