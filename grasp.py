@@ -1,23 +1,32 @@
 import math
-
 from greedy import greedy
+
 
 # Si consideramos a max_iteraciones como una constante, el costo de la funcion es O(busqueda_local),
 # sino O(busqueda_local * max_iteraciones)
 def grasp(grafo_inicial, max_iteraciones, max_mejoras_minimas, ratio_mejora_minima, pos_inicial):
     n_interaciones = 0
-    mejor_sol = [], math.inf
+    mejor_recorrido, mejor_costo = [], math.inf
+    mejor_iteracion = 0
+
+    iteraciones = []
+    iteraciones_costos = []
 
     while n_interaciones < max_iteraciones:
         camino_greedy, peso_greedy = greedy(grafo_inicial, pos_inicial)
-        sol_local = busqueda_local(camino_greedy, peso_greedy, max_mejoras_minimas, ratio_mejora_minima, grafo_inicial)
+        recorrido_local, costo_local = busqueda_local(camino_greedy, peso_greedy, max_mejoras_minimas,
+                                                      ratio_mejora_minima, grafo_inicial)
 
-        if sol_local[1] < mejor_sol[1]:
-            mejor_sol = sol_local
+        if costo_local < mejor_costo:
+            mejor_costo = costo_local
+            mejor_recorrido = recorrido_local
+            mejor_iteracion = n_interaciones
+            iteraciones.append(mejor_iteracion)
+            iteraciones_costos.append(mejor_costo)
 
         n_interaciones += 1
 
-    return mejor_sol
+    return mejor_recorrido, mejor_costo, mejor_iteracion, iteraciones, iteraciones_costos
 
 
 # El costo es O(n^2 * x), donde O(n^2) es el costo de generar_mejor_vecino, y x es la cantidad de iteraciones que haga
