@@ -1,3 +1,3 @@
 Resultado para burma14
-Camino hamiltoniano: [0, 1, 13, 2, 3, 4, 5, 11, 6, 12, 7, 10, 8, 9, 0]
-Valor: 3323.0
+Camino hamiltoniano: [0, 7, 1, 13, 2, 3, 4, 5, 11, 6, 12, 10, 8, 9, 0]
+Valor: 3346.0

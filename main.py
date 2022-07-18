@@ -6,9 +6,9 @@ from grasp import grasp
 from graph_functions import drawGraph
 from utils import plot_result, write_result
 
-MAX_ITERACIONES = 3500
-MAX_MEJORAS_MINIMAS = 5
-RATIO_MEJORA_MINIMA = 0.01
+MAX_ITERACIONES = 5000
+MAX_MEJORAS_MINIMAS = 200
+RATIO_MEJORA_MINIMA = 0.02
 POS_INICIAL = 0
 
 
