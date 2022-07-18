@@ -5,7 +5,7 @@
 La ejecucion de grasp sobre todos los archivos de prueba se realizo con un maximo de iteraciones de 5000, 200 como cantidad maxima de mejoras minimas y un ratio de 2% de mejora minima aceptable.
 
 Para el grafico de scoring completo se guarda la iteracion en la que se obtuvo la mejor solucion, junto con el costo de la misma. De esta manera vemos como algunos grafos alcanzan la mejor solucion encontrada en relativamente pocas iteraciones.
-Tambien se realizaron graficos evolutivos a traves de las etapas para cada grafo, se pueden observar en esta seccion.
+Tambien se realizaron graficos evolutivos a traves de las etapas para cada grafo, se pueden observar en [esta seccion](https://github.com/MauroB3/tsp_grasp/blob/main/resultados/resultados.md).
 
 ![scoring](https://github.com/MauroB3/tsp_grasp/blob/main/images/scoring%20completo.jpg?raw=true)
 
