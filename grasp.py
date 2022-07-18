@@ -2,7 +2,8 @@ import math
 
 from greedy import greedy
 
-
+# Si consideramos a max_iteraciones como una constante, el costo de la funcion es O(busqueda_local),
+# sino O(busqueda_local * max_iteraciones)
 def grasp(grafo_inicial, max_iteraciones, max_mejoras_minimas, ratio_mejora_minima, pos_inicial):
     n_interaciones = 0
     mejor_sol = [], math.inf
@@ -19,6 +20,8 @@ def grasp(grafo_inicial, max_iteraciones, max_mejoras_minimas, ratio_mejora_mini
     return mejor_sol
 
 
+# El costo es O(n^2 * x), donde O(n^2) es el costo de generar_mejor_vecino, y x es la cantidad de iteraciones que haga
+# el while
 def busqueda_local(camino_inicial, peso_inicial, max_mejoras_minimas, ratio_mejora_minima, grafo_inicial):
     mejor_camino, mejor_peso = camino_inicial, peso_inicial
     cant_mejoras_minimas = 0
@@ -26,7 +29,6 @@ def busqueda_local(camino_inicial, peso_inicial, max_mejoras_minimas, ratio_mejo
 
     while continuar_busqueda and cant_mejoras_minimas < max_mejoras_minimas:
         camino_vecino, costo_vecino = generar_mejor_vecino(mejor_camino, mejor_peso, grafo_inicial)
-
 
         if costo_vecino < mejor_peso: # Si el vecino es mejor que la solucion anterior
             minimo_de_mejora = mejor_peso * ratio_mejora_minima
@@ -41,21 +43,24 @@ def busqueda_local(camino_inicial, peso_inicial, max_mejoras_minimas, ratio_mejo
             # por ende, llegó al maximo local
             continuar_busqueda = False
 
-
     return mejor_camino, mejor_peso
 
 
+# Devuelve el mejor vecino a partir de una solucion
+# En peor caso es O(n^2), porque recorre todos los vecinos (O(n)) y si es una mejor solucion hace un copy del recorrido
+# inicial, lo que tiene costo O(n)
+# Sin embargo en promedio es mejor que realizar la copia para cada uno de los vecinos
 def generar_mejor_vecino(recorrido_inicial, costo_inicial, grafo_inicial):
     mejor_recorrido, mejor_costo = recorrido_inicial, costo_inicial
     pos_final = len(recorrido_inicial) - 2
 
     for i in range(1, pos_final):
-        costo_vecino = calcular_costo_vecino(recorrido_inicial, mejor_costo, i, grafo_inicial)
+        costo_vecino = calcular_costo_vecino(recorrido_inicial, costo_inicial, i, grafo_inicial)
 
         if costo_vecino < mejor_costo:
             nuevo_mejor_recorrido = recorrido_inicial.copy()
             mejor_costo = costo_vecino
-            if i == pos_final: # Estoy en el ultimo nodo, lo swapeo con el primero
+            if i == pos_final:  # Estoy en el ultimo nodo, lo swapeo con el primero
                 nuevo_mejor_recorrido[1] = recorrido_inicial[i]
                 nuevo_mejor_recorrido[i] = recorrido_inicial[1]
             else:
@@ -76,7 +81,6 @@ def calcular_costo_vecino(recorrido, costo, i, grafo_inicial):
     nodo_siguiente = recorrido[siguiente_posicion]
     nodo_siguiente_siguiente = recorrido[siguiente_posicion + 1]
 
-
     return costo \
         - grafo_inicial[nodo_anterior][nodo_actual]['weight'] \
         - grafo_inicial[nodo_actual][nodo_siguiente]['weight'] \
@@ -84,5 +88,6 @@ def calcular_costo_vecino(recorrido, costo, i, grafo_inicial):
         + grafo_inicial[nodo_anterior][nodo_siguiente]['weight'] \
         + grafo_inicial[nodo_siguiente][nodo_actual]['weight'] \
         + grafo_inicial[nodo_actual][nodo_siguiente_siguiente]['weight']
+
 
 
