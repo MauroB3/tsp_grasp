@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 def plot_result(x, x_label, y, y_label, nombre):
     plt.plot(x, y)
     plt.xlabel(x_label)
+    plt.xticks(fontsize=8)
+    ax = plt.subplot()
+    plt.setp(ax.get_xticklabels(), rotation=45, ha='right')
     plt.ylabel(y_label)
     plt.title(nombre)
     ruta = './images/' + nombre + '.jpg'

@@ -97,6 +97,3 @@ def calcular_costo_vecino(recorrido, costo, i, grafo_inicial):
         + grafo_inicial[nodo_anterior][nodo_siguiente]['weight'] \
         + grafo_inicial[nodo_siguiente][nodo_actual]['weight'] \
         + grafo_inicial[nodo_actual][nodo_siguiente_siguiente]['weight']
-
-
-

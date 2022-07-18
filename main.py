@@ -46,5 +46,5 @@ def grasp_todos():
 
 
 if __name__ == '__main__':
-    # grasp_grafo_unico("brg180")
+    # grasp_grafo_unico("att48")
     grasp_todos()
