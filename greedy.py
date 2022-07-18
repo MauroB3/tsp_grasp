@@ -1,8 +1,9 @@
 # Margen es la variable que vamos a utilizar para la aleatoriedad
 import random
 
+
 # O(n*m)
-def greedy(grafo, inicio, margen):
+def greedy(grafo, inicio, margen=3):
     peso_final = 0
     actual = inicio
     camino = [inicio]
